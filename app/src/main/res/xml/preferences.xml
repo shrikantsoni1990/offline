@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="main"
+        android:title="Relay Preferences">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="process_incoming"
+            android:summary="Whether to process incoming SMS messages"
+            android:title="Process Incoming" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="process_outgoing"
+            android:summary="Whether to process outgoing messages from the server"
+            android:title="Process Outgoing" />
+
+        <EditTextPreference
+            android:defaultValue="nyaruka"
+            android:dialogMessage="Make your own password, will be used as a keyword"
+            android:dialogTitle="Relay Password"
+            android:key="relay_password"
+            android:maxLength="7"
+            android:summary="This password will be used to validate administrative SMS commands"
+            android:title="Relay Password" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/preferredNet"
+            android:entryValues="@array/preferredNetValues"
+            android:key="pref_net"
+            android:summary="Choose which network you prefer for usage based on availability in your area"
+            android:title="Preferred Network" />
+
+        <ListPreference
+            android:defaultValue="15000"
+            android:entries="@array/updateInterval"
+            android:entryValues="@array/updateIntervalValues"
+            android:key="update_interval"
+            android:summary="Define how long we will wait before resending errored messages and checking the server for new ones"
+            android:title="Update Interval" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="server"
+        android:title="Router Server Configuration">
+
+        <EditTextPreference
+            android:defaultValue="http://"
+            android:dialogMessage="Enter the server receive URL"
+            android:dialogTitle="Server Receive URL"
+            android:key="receive_url"
+            android:summary="Defines the URL messages will be delivered to"
+            android:title="Receive URL" />
+
+        <EditTextPreference
+            android:defaultValue="http://"
+            android:dialogMessage="Enter the server outbox URL"
+            android:dialogTitle="Server Outbox URL"
+            android:key="outbox_url"
+            android:summary="Defines the URL outgoing messages will be fetched from"
+            android:title="Outbox URL" />
+
+        <EditTextPreference
+            android:defaultValue="http://"
+            android:dialogMessage="Enter the server delivery URL"
+            android:dialogTitle="Server Delivery URL"
+            android:key="delivery_url"
+            android:summary="Defines the URL outgoing messages will be fetched from"
+            android:title="Delivery URL" />
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Router">
+        <EditTextPreference
+            android:dialogMessage="Enter in the hostname (and optional port) for the Router endpoint"
+            android:dialogTitle="Hostname"
+            android:key="router_hostname"
+            android:summary="Configures our endpoints based on a router hostname"
+            android:title="Hostname" />
+        <EditTextPreference
+            android:defaultValue="android"
+            android:dialogMessage="The name of the backend for the Router server"
+            android:dialogTitle="Backend"
+            android:key="router_backend"
+            android:summary="The name of the backend for the Router"
+            android:title="Backend" />
+        <EditTextPreference
+            android:dialogMessage="The password for the Router instance"
+            android:dialogTitle="Password"
+            android:key="router_password"
+            android:summary="The router password for the router instance"
+            android:title="Password" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Debug">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="toggle_airplane"
+            android:summary="Whether to toggle airplane mode to regain network access"
+            android:title="Airplane mode reset" />
+        <Preference
+            android:key="clear_messages"
+            android:summary="Clears all messages in our local database"
+            android:title="Clear Messages" />
+        <Preference
+            android:key="send_log"
+            android:summary="Send a debug log to the administrator"
+            android:title="Send Debug Log" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
