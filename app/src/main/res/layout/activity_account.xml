@@ -39,6 +39,7 @@
             android:layout_height="40dp"
             android:background="@drawable/edittext_bg"
             android:maxLines="1"
+            android:inputType="numberSigned"
             android:singleLine="true" />
 
         <TextView

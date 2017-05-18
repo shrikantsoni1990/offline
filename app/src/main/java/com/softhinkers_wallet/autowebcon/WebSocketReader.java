@@ -569,7 +569,7 @@ public class WebSocketReader extends Thread {
      * Consume data buffered in mFrameBuffer.
      */
     private boolean consumeData() throws Exception {
-        Log.d("test",mState.toString());
+       // Log.d("test",mState.toString());
         switch (mState) {
             case STATE_OPEN:
             case STATE_CLOSING:

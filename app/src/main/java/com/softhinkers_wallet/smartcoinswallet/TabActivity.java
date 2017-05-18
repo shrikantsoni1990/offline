@@ -348,7 +348,11 @@ public class TabActivity extends BaseActivity implements BackupBinDelegate, Prom
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-         intent_account_id = getIntent().getStringExtra("account_id");
+        try {
+            intent_account_id = getIntent().getStringExtra("account_id");
+        }catch(Exception e){
+            intent_account_id = "TAB";
+        }
 
         setContentView(R.layout.activity_tab);
         ButterKnife.bind(this);

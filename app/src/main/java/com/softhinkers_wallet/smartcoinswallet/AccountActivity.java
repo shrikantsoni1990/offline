@@ -167,7 +167,7 @@ public class AccountActivity extends BaseActivity implements IAccount, IAccountI
         Application.registerCallback(this);
         Application.registerCallbackIAccountID(this);
         progressDialog = new ProgressDialog(this);
-        updateBlockNumberHead();
+      //  updateBlockNumberHead();
 
         final Handler handler = new Handler();
         final Runnable createFolder = new Runnable() {
@@ -251,7 +251,8 @@ public class AccountActivity extends BaseActivity implements IAccount, IAccountI
         etAccountName.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         hasNumber = false;
         validAccount = true;
-        if (text.length() > 5 && containsDigit(text.toString()) && text.toString().contains("-")) {
+       // if (text.length() > 5 && containsDigit(text.toString()) && text.toString().contains("-")) {
+        if (text.length() == 10 && containsDigit(text.toString())) {
             Log.d(TAG, "Starting validation check..");
             checkingValidation = true;
             hasNumber = true;
@@ -264,7 +265,8 @@ public class AccountActivity extends BaseActivity implements IAccount, IAccountI
 
     public void createBitShareAN(boolean focused) {
         if (!focused) {
-            if (etAccountName.getText().length() > 5) {
+           // if (etAccountName.getText().length() > 5) {
+            if (etAccountName.getText().length()== 10) {
                 if (hasNumber) {
                     tvErrorAccountName.setText("");
                     tvErrorAccountName.setVisibility(View.GONE);
@@ -347,10 +349,12 @@ public class AccountActivity extends BaseActivity implements IAccount, IAccountI
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
 
                 for (int i = start; i < end; i++) {
-                    if ((dstart == 0) && (!Character.isLetter(source.charAt(0)))) {
+                   // if ((dstart == 0) && (!Character.isLetter(source.charAt(0)))) {
+                    if ((dstart == 0) && (!Character.isDigit(source.charAt(0)))) {
                         return "";
-                    } else if (!Character.isLetterOrDigit(source.charAt(i)) && (source.charAt(i) != '-')) {
-                        return "";
+                   // } else if (!Character.isLetterOrDigit(source.charAt(i)) && (source.charAt(i) != '-')) {
+                       // else if (!Character.isDigit(source.charAt(i))) {
+                        //return "";
                     }
                 }
 
@@ -435,7 +439,7 @@ public class AccountActivity extends BaseActivity implements IAccount, IAccountI
 
         try {
             //TODO Shrikant ServiceGenerator sg = new ServiceGenerator(getString(R.string.account_create_url));
-            ServiceGenerator sg = new ServiceGenerator("http://192.168.0.7:8080");
+            ServiceGenerator sg = new ServiceGenerator(Application.urlsSocketConnection[0]);
             IWebService service = sg.getService(IWebService.class);
             final Call<RegisterAccountResponse> postingService = service.getRegLocal(hashMap);
             postingService.enqueue(new Callback<RegisterAccountResponse>() {
@@ -450,7 +454,7 @@ public class AccountActivity extends BaseActivity implements IAccount, IAccountI
                             try {
                                 if (resp.account.name.equals(accountName)) {
                                     //getAccountId(accountName);
-                                    getFakeAccountId(accountName,resp.account.acountId);
+                                    getFakeAccountId(accountName,resp.account.name);
                                     tvErrorAccountName.setVisibility(View.GONE);
                                 } else {
                                     Log.w(TAG, "Response account name differs from 'accountName'");
@@ -620,7 +624,7 @@ public class AccountActivity extends BaseActivity implements IAccount, IAccountI
         checkingValidation = false;
     }
 
-    void addWallet(String account_id, Long accountID) {
+    void addWallet(String account_id, String accountID) {
         AccountDetails accountDetails = new AccountDetails();
         accountDetails.pinCode = etPin.getText().toString();
         accountDetails.wif_key = wifPrivKey;
@@ -647,7 +651,7 @@ public class AccountActivity extends BaseActivity implements IAccount, IAccountI
             intent = new Intent(getApplicationContext(), TabActivity.class);
         }
 
-        intent.putExtra("account_id",accountID.toString());
+        intent.putExtra("account_id",accountID);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 
@@ -658,7 +662,7 @@ public class AccountActivity extends BaseActivity implements IAccount, IAccountI
         finish();
     }
 
-    private void getFakeAccountId(final String accountName, Long acountId) {
+    private void getFakeAccountId(final String accountName, String acountId) {
         addWallet(accountName,acountId);
     }
 

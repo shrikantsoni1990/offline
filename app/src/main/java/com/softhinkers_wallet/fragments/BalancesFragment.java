@@ -795,7 +795,9 @@ public class BalancesFragment extends Fragment implements AssetDelegate, ISound,
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-         account_id = ((TabActivity) getActivity()).getIntent_account_id();
+        account_id = ((TabActivity) getActivity()).getIntent_account_id();
+
+
         tinyDB = new TinyDB(getContext());
         iSound = this;
         updateEquivalentAmount = new Handler();
@@ -834,7 +836,7 @@ public class BalancesFragment extends Fragment implements AssetDelegate, ISound,
         }
         Log.e(TAG, "mSmartcoin: " + mSmartcoin.getSymbol());
 
-        getBalanceDetails();
+        //getBalanceDetails(account_id);
 
     }
 
@@ -889,6 +891,7 @@ public class BalancesFragment extends Fragment implements AssetDelegate, ISound,
             Helper.storeStringSharePref(getActivity(), "ltmAmount", "100");
         }
 //        getLtmPrice(getActivity(), tvAccountName.getText().toString());
+        getBalanceDetails(tvAccountName.getText().toString());
         return rootView;
     }
 
@@ -952,6 +955,8 @@ public class BalancesFragment extends Fragment implements AssetDelegate, ISound,
 
         // Loading transfers from database
         //updateTableView(true);
+
+        getBalanceDetails(tvAccountName.getText().toString());
 
     }
 
@@ -1247,7 +1252,6 @@ public class BalancesFragment extends Fragment implements AssetDelegate, ISound,
                             sym.add(j, accountAsset.get(j).symbol);
                             am.add(j, accountAsset.get(j).ammount);
                         }
-
                         BalanceAssetsUpdate(sym, pre, am, true);
                     }
 
@@ -2386,11 +2390,13 @@ public class BalancesFragment extends Fragment implements AssetDelegate, ISound,
                     }
                 });
         builderSingle.show();
+
     }
 
     @OnClick(R.id.ivMultiAccArrow)
     public void ivOnChangedAccount(View view) {
         onChangedAccount();
+
     }
 
     @OnClick(R.id.account_name)
@@ -2601,7 +2607,7 @@ public class BalancesFragment extends Fragment implements AssetDelegate, ISound,
         Toast.makeText(getContext(), getActivity().getText(R.string.pdf_generated_msg_error) + message, Toast.LENGTH_LONG).show();
     }
 
-    private void getBalanceDetails() {//TODO
+    private void getBalanceDetails(String account_id) {//TODO
        // final String accountName = etAccountName.getText().toString();
         HashMap<String, Object> hm = new HashMap<>();
         hm.put("accountId", account_id);//TODO
@@ -2609,7 +2615,7 @@ public class BalancesFragment extends Fragment implements AssetDelegate, ISound,
 
         try {
             //TODO Shrikant ServiceGenerator sg = new ServiceGenerator(getString(R.string.account_create_url));
-            ServiceGenerator sg = new ServiceGenerator("http://192.168.0.7:8080");
+            ServiceGenerator sg = new ServiceGenerator(Application.urlsSocketConnection[0]);
             IWebService service = sg.getService(IWebService.class);
             final Call<RegisterBalanceResponse> postingService = service.getRemoteBalance(hm);
             postingService.enqueue(new Callback<RegisterBalanceResponse>() {

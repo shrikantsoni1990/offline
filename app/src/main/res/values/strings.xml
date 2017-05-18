@@ -63,7 +63,8 @@ Build number: <xliff:g id="build_number">%s</xliff:g>\n
     <string name="error_brainkey_wif_export">WIF imported account doesn\'t support brainkey backup</string>
 
     <string name="account_create_register_or_import">ACCOUNT CREATE/REGISTER OR IMPORT</string>
-    <string name="txt_account_name">Account Name</string>
+    <string name="txt_account_name_org">Account Name</string>
+    <string name="txt_account_name">Phone Number</string>
     <string name="time_stamp">Time stamp</string>
     <string name="email_pdf">Email PDF</string>
     <string name="account"> Account</string>

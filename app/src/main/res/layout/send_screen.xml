@@ -235,8 +235,7 @@
                                         android:id="@+id/contactButton"
                                         android:layout_width="25dp"
                                         android:layout_height="match_parent"
-                                        android:layout_alignParentEnd="true"
-                                        android:layout_alignParentStart="true"
+
                                         android:layout_centerVertical="true"
                                         android:src="@drawable/share_group" />
                                 </RelativeLayout>
@@ -560,29 +559,28 @@
                     android:layout_below="@+id/llMemo"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="20dp"
-                    android:visibility="gone"
-                    android:text="@string/checkbox_donate" />
+                    android:text="@string/checkbox_donate"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/btnSend"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/layout_margin"
-                    android:weightSum="4"
+                    android:layout_alignParentBottom="true"
+
+                    android:layout_below="@id/cbAlwaysDonate"
                     android:background="@drawable/send_button_background"
-                    android:gravity="center"
-                    android:text="@string/send_capital"
+                    android:drawablePadding="-60dp"
                     android:drawableRight="@drawable/ic_send_button"
+                    android:enabled="false"
+                    android:gravity="center"
+
                     android:paddingLeft="40dp"
+                    android:text="@string/send_capital"
                     android:textColor="#fff"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentStart="true"
-                    android:paddingEnd="100dp"
-                    android:drawablePadding="-60dp"
-                    android:layout_below="@id/cbAlwaysDonate"
-                    android:enabled="false">
-                </Button>
+                    android:weightSum="4"></Button>
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

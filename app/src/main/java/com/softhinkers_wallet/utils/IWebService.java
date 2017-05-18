@@ -9,6 +9,7 @@ import com.softhinkers_wallet.models.RegisterAccountResponse;
 import com.softhinkers_wallet.models.RegisterBalanceResponse;
 import com.softhinkers_wallet.models.ResponseBinFormat;
 import com.softhinkers_wallet.models.TransactionIdResponse;
+import com.softhinkers_wallet.models.TransactionResponse;
 import com.softhinkers_wallet.models.TransactionSmartCoin;
 import com.softhinkers_wallet.models.TransferResponse;
 
@@ -86,6 +87,11 @@ public interface IWebService {
     @Headers({"Content-Type: application/json"})
     @POST("/v1/getBalance")
     Call<RegisterBalanceResponse> getRemoteBalance(@Body Map<String, Object> params);
+    //TODO Shrikant
+
+    @Headers({"Content-Type: application/json"})
+    @POST("/v1/transfer")
+    Call<TransactionResponse> getTransactionSendResponse(@Body Map<String, String> params);
     //TODO Shrikant
 
     @GET

@@ -57,7 +57,7 @@ public class Application extends android.app.Application implements WebSocket.We
     public static String urlsSocketConnection[] =
             {
                     //"wss://de.blockpay.ch/node",
-                    "http://192.168.0.7:8080/",
+                    "http://192.168.0.9:8080/",
             };
     public static String monitorAccountId;
     public static int nodeIndex = 0;
